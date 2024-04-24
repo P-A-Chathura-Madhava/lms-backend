@@ -16,8 +16,8 @@ export class StudentService {
     return await this.studentsRepository.save(student);
   }
 
-  findAll() {
-    return `This action returns all student`;
+  async findAll() {
+    return await this.studentsRepository.find();
   }
 
   findOne(id: number) {
