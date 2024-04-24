@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateStudentDto } from './dto/create-student.dto';
 import { UpdateStudentDto } from './dto/update-student.dto';
 import { Repository } from 'typeorm';
@@ -26,8 +26,13 @@ export class StudentService {
     });
   }
 
-  update(id: number, updateStudentDto: UpdateStudentDto) {
-    return `This action updates a #${id} student`;
+  async update(id: number, updateStudentDto: UpdateStudentDto) {
+    const student = await this.findOne(id);
+    if (!student) {
+      throw new NotFoundException();
+    }
+    Object.assign(student, updateStudentDto);
+    return await this.studentsRepository.save(student);
   }
 
   remove(id: number) {
