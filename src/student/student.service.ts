@@ -20,8 +20,10 @@ export class StudentService {
     return await this.studentsRepository.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} student`;
+  async findOne(id: number) {
+    return await this.studentsRepository.findOne({
+      where: {id}
+    });
   }
 
   update(id: number, updateStudentDto: UpdateStudentDto) {
