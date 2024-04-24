@@ -28,7 +28,7 @@ export class StudentController {
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
+  remove(@Param('id', ParseIntPipe) id: number) {
     return this.studentService.remove(+id);
   }
 }

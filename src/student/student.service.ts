@@ -35,7 +35,11 @@ export class StudentService {
     return await this.studentsRepository.save(student);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} student`;
+  async remove(id: number) {
+    const student = await this.findOne(id);
+    if (!student) {
+      throw new NotFoundException();
+    }
+    return await this.studentsRepository.remove(student);
   }
 }
