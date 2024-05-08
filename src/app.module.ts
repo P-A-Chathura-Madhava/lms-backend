@@ -5,6 +5,10 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { join } from 'path';
 import { StudentModule } from './student/student.module';
+import { AuthModule } from './auth/auth.module';
+import { UsersModule } from './users/users.module';
+import { JwtModule } from '@nestjs/jwt';
+import { JWTModule } from './auth/JWT.module';
 
 @Module({
   imports: [
@@ -24,6 +28,10 @@ import { StudentModule } from './student/student.module';
       })
     }),
     StudentModule,
+    AuthModule,
+    UsersModule,
+    // JwtModule,
+    JWTModule
   ],
   controllers: [AppController],
   providers: [AppService],
